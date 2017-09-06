@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Users list</h3>
+  </div>
+  <div class="panel-body">
+  	<div class="alert alert-danger" ng-show="!(users.usersData.succeed)"><strong>Failed to get users list from the server!</strong></div>
+  	<div class="table-responsive" ng-show="users.usersData.succeed">
+	    <table class="table table-striped table-bordered table-hover">
+			<tr>
+				<th ng-repeat="(key,value) in users.usersData.usersList[0]">{{key | uppercase}}</th>
+			</tr>
+			<tr ng-repeat="user in users.usersData.usersList track by $index">
+				<td ng-repeat="(userKey, userValue) in user">{{userValue}}</td>
+			</tr>
+	    </table>
+	</div>
+  </div>
+</div>
+<div class="alert alert-success" ng-show="addUserForm.$submitted">User added!</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Add new user</h3>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" novalidate name="addUserForm">
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="form-group">
+						<label class="col-xs-6 input-label">First name</label>
+						<input type="text" required class="col-xs-6 input-field" ng-model="users.usersData.newUser.firstname">
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="form-group">
+						<label class="col-xs-6 input-label">Last name</label>
+						<input type="text" required class="col-xs-6 input-field" ng-model="users.usersData.newUser.lastname">
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="form-group">
+						<label class="col-xs-6 input-label">Email</label>
+						<input type="email" required class="col-xs-6 input-field" ng-model="users.usersData.newUser.email">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="submit" value="Add user" class="btn btn-info" ng-disabled="addUserForm.$invalid" ng-click="users.usersData.addNewUser()">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
